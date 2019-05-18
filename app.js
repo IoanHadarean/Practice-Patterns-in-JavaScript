@@ -35,9 +35,12 @@
 
 
 
-// var posts = [];
 
 // // Module Pattern
+
+// Initialise posts array
+// var posts = [];
+
 // const AddPostsCtrl =  (function() {
 
 
@@ -97,38 +100,38 @@
 // Singleton Pattern
 
 // Class for creating posts
-// class Post {
-//     constructor(author, post, id) {
-//         this.author =  author;
-//         this.post = post;
-//         this.id = id;
-//     }
-// }
+class Post {
+    constructor(author, post, id) {
+        this.author =  author;
+        this.post = post;
+        this.id = id;
+    }
+}
 
-// // Initialise instancePost object
-// let instancePost = new Post('MemoriesRemain', 'Trying to be a happy person.....', 1);
+// Initialise instancePost object
+let instancePost = new Post('MemoriesRemain', 'Trying to be a happy person.....', 1);
 
 
-// // Singleton iffy function for creating a single post
-// const SingletonPost =  (function() {
+// Singleton iffy function for creating a single post
+const SingletonPost =  (function() {
     
-//     const createPost =  function() {
-//         return instancePost;
-//     };
+    const createPost =  function() {
+        return instancePost;
+    };
     
-//     return {
-//         getPost: function() {
-//             if (!instancePost) {
-//                 instancePost = createPost();
-//             }
-//             return instancePost;
-//         }
-//     };
+    return {
+        getPost: function() {
+            if (!instancePost) {
+                instancePost = createPost();
+            }
+            return instancePost;
+        }
+    };
     
-// })();
+})();
 
-// // Posts are the same
-// const instancePost1 = SingletonPost.getPost();
-// const instancePost2 = SingletonPost.getPost();
-// console.log(instancePost1);
-// console.log(instancePost2);
+// Posts are the same
+const instancePost1 = SingletonPost.getPost();
+const instancePost2 = SingletonPost.getPost();
+console.log(instancePost1);
+console.log(instancePost2);
