@@ -29,7 +29,6 @@
 
 // PostsCtrl.addPost('John', 'Hello, this is my post', 1);
 // PostsCtrl.deletePost('John', 1);
-// console.log(PostsCtrl.posts);
 
 
 
@@ -143,8 +142,6 @@
 // // Posts are the same
 // const instancePostCall1 = SingletonPost.getPost();
 // const instancePostCall2 = SingletonPost.getPost();
-// console.log(instancePostCall1);
-// console.log(instancePostCall2);
 
 
 
@@ -163,7 +160,7 @@ class StandardAccount {
 
 // Create PremiumAccountDays class for player
 class PremiumAccountDays {
-    constructor(player, days, year) {
+    constructor(player, days) {
         this.player =  player;
         this.cost = '£5';
         this.days = days;
@@ -172,7 +169,7 @@ class PremiumAccountDays {
 
 // Create PremiumAccountYear class for player
 class PremiumAccountYear {
-    constructor(player, days, year) {
+    constructor(player, year) {
         this.player =  player;
         this.cost = '£5';
         this.year = year;
@@ -187,10 +184,10 @@ function createMember() {
             member =  new StandardAccount(player);
         }
         else if (type == 'premiumaccountyear') {
-            member = new PremiumAccountYear(player, year);
+            member = new PremiumAccountYear(player, days, year);
         }
         else if (type == 'premiumaccountdays') {
-            member =  new PremiumAccountDays(player, days);
+            member =  new PremiumAccountDays(player, days, year);
         }
         
         return member;
@@ -201,5 +198,5 @@ let players = [];
 let member = new createMember();
 players.push(member.createMembership('goagl', 'standard'));
 players.push(member.createMembership('RyanC00per', 'premiumaccountdays', '30'));
-players.push(member.createMembership('Ioan', 'standard'));
+players.push(member.createMembership('SuperSaiyanGokuandVegeta', 'premiumaccountyear', '1'));
 console.log(players);
