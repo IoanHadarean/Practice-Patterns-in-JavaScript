@@ -2,3 +2,4 @@
 1. Module Pattern
 2. Revealing Module Pattern
 3. Singleton Pattern
+4. Factory Pattern

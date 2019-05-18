@@ -100,48 +100,106 @@
 // Singleton Pattern
 
 // Class for creating posts
-class Post {
-    constructor(author, post, id) {
-        this.author =  author;
-        this.post = post;
-        this.id = id;
+// class Post {
+//     constructor(author, post, id) {
+//         this.author =  author;
+//         this.post = post;
+//         this.id = id;
+//     }
+// }
+
+
+// // Initialise instancePost object
+// let instancePost1 = new Post('MemoriesRemain', 'Trying to be a happy person.....', 1);
+// let instancePost2 = new Post('Ioan1997', 'A random post', 2);
+// let instancePost3 = new Post('MemoriesRemain', 'Trying to be a happy person.....', 3);
+
+// // Initialise instancePosts array
+// let instancePosts = [];
+// instancePosts.push(instancePost1);
+// instancePosts.push(instancePost2);
+// instancePosts.push(instancePost3);
+
+// // Singleton iffy function for creating a single post
+// const SingletonPost =  (function() {
+    
+//     const createPost =  function(index) {
+//         for (var index = 0; index < instancePosts.length; index++) {
+//             return instancePosts[index];
+//         }
+//     };
+    
+//     return {
+//         getPost: function(index) {
+//             if (!instancePosts[index]) {
+//                 instancePosts[index] = createPost();
+//             }
+//             return instancePosts[index];
+//         }
+//     };
+    
+// })();
+
+// // Posts are the same
+// const instancePostCall1 = SingletonPost.getPost();
+// const instancePostCall2 = SingletonPost.getPost();
+// console.log(instancePostCall1);
+// console.log(instancePostCall2);
+
+
+
+
+
+// Factory pattern
+
+// Create StandardAccount class for player
+class StandardAccount {
+    constructor(player) {
+        this.player =  player;
+        this.cost = '£0';
+        this.days = 0;
     }
 }
 
+// Create PremiumAccountDays class for player
+class PremiumAccountDays {
+    constructor(player, days, year) {
+        this.player =  player;
+        this.cost = '£5';
+        this.days = days;
+    }
+}
 
-// Initialise instancePost object
-let instancePost1 = new Post('MemoriesRemain', 'Trying to be a happy person.....', 1);
-let instancePost2 = new Post('Ioan1997', 'A random post', 2);
-let instancePost3 = new Post('MemoriesRemain', 'Trying to be a happy person.....', 3);
+// Create PremiumAccountYear class for player
+class PremiumAccountYear {
+    constructor(player, days, year) {
+        this.player =  player;
+        this.cost = '£5';
+        this.year = year;
+    }
+}
 
-// Initialise instancePosts array
-let instancePosts = [];
-instancePosts.push(instancePost1);
-instancePosts.push(instancePost2);
-instancePosts.push(instancePost3);
-
-// Singleton iffy function for creating a single post
-const SingletonPost =  (function() {
-    
-    const createPost =  function(index) {
-        for (var index = 0; index < instancePosts.length; index++) {
-            return instancePosts[index];
+function createMember() {
+    this.createMembership = function(player, type, days, year) {
+        let member;
+        
+        if (type == 'standard') {
+            member =  new StandardAccount(player);
         }
-    };
-    
-    return {
-        getPost: function(index) {
-            if (!instancePosts[index]) {
-                instancePosts[index] = createPost();
-            }
-            return instancePosts[index];
+        else if (type == 'premiumaccountyear') {
+            member = new PremiumAccountYear(player, year);
         }
+        else if (type == 'premiumaccountdays') {
+            member =  new PremiumAccountDays(player, days);
+        }
+        
+        return member;
     };
-    
-})();
+}
 
-// Posts are the same
-const instancePostCall1 = SingletonPost.getPost();
-const instancePostCall2 = SingletonPost.getPost();
-console.log(instancePostCall1);
-console.log(instancePostCall2);
+let players = [];
+let member = new createMember();
+players.push(member.createMembership('goagl', 'standard'));
+players.push(member.createMembership('RyanC00per', 'premiumaccountdays', '30'));
+players.push(member.createMembership('Ioan', 'standard'));
+console.log(players);
