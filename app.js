@@ -249,6 +249,8 @@ document.querySelector('.show-subscriptions').addEventListener('click', function
     subscription.fireEvent();
 });
 
+
+// Add subscribe and unsubscribe callback functions
 const sendSubscribeEmail = function() {
     console.log("Now send an email to the user, letting him know that he is subscribed using an email API service");
 };
