@@ -25,3 +25,25 @@ const HomeState = function(page) {
       </div>
       `;
 };
+
+// About State
+const AboutState =  function(page) {
+    document.querySelector('#heading').textContent = 'Welcome to the about page';
+    document.querySelector('#content').innerHTML = 'About page';
+};
+
+// Contact State
+const ContactState =  function(page) {
+    document.querySelector('#heading').textContent = 'Contact us';
+    document.querySelector('#content').innerHTML = `
+    <form>
+        <div class="form-group">
+            <label for="exampleFormControlFile1">Example file input</label>
+            <input type="file" class="form-control-file" id="exampleFormControlFile1">
+        </div>
+    </form>
+    `;
+};
+
+// Initialise Page State
+const page =  new PageState;
