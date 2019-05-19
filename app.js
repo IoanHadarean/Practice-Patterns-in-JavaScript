@@ -72,7 +72,7 @@
 // AddPostsCtrl.callAddPost('Andrei', 'I wish I was an eagle', 1);
 
 // const DeletePostsCtrl = (function() {
-    
+
 //     const deletePost = function(author, id) {
 //         for (var i = 0; i < posts.length; i++) {
 //             if (posts[i].author === author && posts[i].id === id) {
@@ -80,7 +80,7 @@
 //             }
 //         }
 //     };
-    
+
 //     return {
 //         callDeletePost: function(author, id) {
 //             deletePost(author, id);
@@ -121,13 +121,13 @@
 
 // // Singleton iffy function for creating a single post
 // const SingletonPost =  (function() {
-    
+
 //     const createPost =  function(index) {
 //         for (var index = 0; index < instancePosts.length; index++) {
 //             return instancePosts[index];
 //         }
 //     };
-    
+
 //     return {
 //         getPost: function(index) {
 //             if (!instancePosts[index]) {
@@ -136,7 +136,7 @@
 //             return instancePosts[index];
 //         }
 //     };
-    
+
 // })();
 
 // // Posts are the same
@@ -179,7 +179,7 @@
 // function createMember() {
 //     this.createMembership = function(player, type, days, year) {
 //         let member;
-        
+
 //         if (type == 'standard') {
 //             member =  new StandardAccount(player);
 //         }
@@ -189,7 +189,7 @@
 //         else if (type == 'premiumaccountdays') {
 //             member =  new PremiumAccountDays(player, days, year);
 //         }
-        
+
 //         return member;
 //     };
 // }
@@ -219,18 +219,18 @@
 //             countSubscriptions += 1;
 //         }
 //     }
-    
+
 //     unsubscribe(fn) {
 //         if (countSubscriptions > 0) {
 //             countSubscriptions -= 1;
 //             if (this.subscriptions.length !== 0) {
 //                 this.subscriptions.pop();
 //                 alert("You are now unsubscribed from Twitch");
-                
+
 //             }
 //         }
 //     }
-    
+
 //     fireEvent() {
 //         alert(`You are subbed to ${countSubscriptions} channels on Twich`);
 //     }
@@ -269,26 +269,63 @@ const User = function(name) {
 };
 
 
-User.prototype =  {
-    send: function(to, message) {
-        console.log(`${this.name} to ${to.name}: ${message}`);
+User.prototype = {
+    send: function(message, to) {
+        // The keyword 'this' refers to the user created
+        // with the User constructor
+        // The 'this' keyword is actually a placeholder
+        // for 'from' in the send function existent in the
+        // Chatroom constructor
+        this.chatroom.send(message, to, this);
     },
-    
-    receive: function(from, message) {
-        console.log(`From ${from.name}: ${message}`);
-    }
 };
 
 
 
 
+const Chatroom = function() {
+
+    let users = {};
+
+    return {
+        register: function(user) {
+            users[user.name] = user;
+            user.chatroom = this;
+        },
+        send: function(message, to, from) {
+            if (to) {
+                console.log(`${from.name} to ${to.name}: ${message}`);
+            }
+            else {
+                // Loop through the keys in the users object
+                // If the key is equal to the user that sent the message
+                // exclude that user from receiving the message
+                // else send the message to all chat
+                for (k in users) {
+                    if (users[k] !== from) {
+                        console.log(`${from.name} to ${users[k].name}: ${message}`);
+                    }
+                }
+            }
+        },
+    };
+};
+
+
 
 
 const john = new User('John');
-console.log(john);
 const ioan = new User('Ioan');
 const andreea = new User('Andreea');
 
-const chatroom =  new Chatroom;
-ioan.send(andreea, 'I love you');
-andreea.receive(ioan, 'I love you');
+const chat = new Chatroom;
+
+chat.register(ioan);
+chat.register(andreea);
+chat.register(john);
+
+ioan.send('I love you', andreea);
+john.send('Hello guys');
+
+
+
