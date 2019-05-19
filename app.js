@@ -210,25 +210,26 @@ class SubscriptionTwitch {
 
     
     subscribe(fn) {
-        this.subscriptions.push(fn);
+        if (countSubscriptions < 1) {
+            this.subscriptions.push(fn);
+            console.log(this.subscriptions);
+            countSubscriptions += 1;
+            console.log(countSubscriptions);
+        }
         alert("You are now subscribed to Twitch");
     }
     
     unsubscribe(fn) {
-        if (this.subscriptions.length !== 0) {
-            for (var i = 0; i < this.subscriptions.length ; i++) {
-                countSubscriptions -= 1;
-            }
+        if (this.subscriptions.length !== 0 && countSubscriptions > 0) {
+            countSubscriptions -= 1;
+             console.log(countSubscriptions);
+             console.log(this.subscriptions);
+            alert("You are now unsubscribed from Twitch");
         }
-        alert("You are now unsubscribed from Twitch");
-        alert(`You are subbed to ${countSubscriptions} channels on Twich`);
     }
     
     fireEvent() {
-        this.subscriptions.forEach(function(subscription) {
-            countSubscriptions += 1;
-            alert(`You are subbed to ${countSubscriptions} channels on Twich`);
-        });
+        alert(`You are subbed to ${countSubscriptions} channels on Twich`);
     }
 }
 
