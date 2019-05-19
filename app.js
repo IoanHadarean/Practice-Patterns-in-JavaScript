@@ -203,129 +203,129 @@
 
 // Observer Pattern
 
-// let countSubscriptions = 0;
+let countSubscriptions = 0;
 
-// class SubscriptionTwitch {
-//     constructor() {
-//         this.subscriptions = [];
-//     }
+class SubscriptionTwitch {
+    constructor() {
+        this.subscriptions = [];
+    }
 
-//     subscribe(fn) {
-//         if (countSubscriptions < 1) {
-//             if (this.subscriptions.length !== 1) {
-//                 this.subscriptions.push(fn);
-//                 alert("You are now subscribed to Twitch");
-//             }
-//             countSubscriptions += 1;
-//         }
-//     }
+    subscribe(fn) {
+        if (countSubscriptions < 1) {
+            if (this.subscriptions.length !== 1) {
+                this.subscriptions.push(fn);
+                alert("You are now subscribed to Twitch");
+            }
+            countSubscriptions += 1;
+        }
+    }
 
-//     unsubscribe(fn) {
-//         if (countSubscriptions > 0) {
-//             countSubscriptions -= 1;
-//             if (this.subscriptions.length !== 0) {
-//                 this.subscriptions.pop();
-//                 alert("You are now unsubscribed from Twitch");
+    unsubscribe(fn) {
+        if (countSubscriptions > 0) {
+            countSubscriptions -= 1;
+            if (this.subscriptions.length !== 0) {
+                this.subscriptions.pop();
+                alert("You are now unsubscribed from Twitch");
 
-//             }
-//         }
-//     }
+            }
+        }
+    }
 
-//     fireEvent() {
-//         alert(`You are subbed to ${countSubscriptions} channels on Twich`);
-//     }
-// }
+    fireEvent() {
+        alert(`You are subbed to ${countSubscriptions} channels on Twich`);
+    }
+}
 
-// const subscription = new SubscriptionTwitch();
+const subscription = new SubscriptionTwitch();
 
-// // Add event listeners for buttons
-// document.querySelector('.sub-twitch').addEventListener('click', function() {
-//     subscription.subscribe(sendSubscribeEmail);
-// });
+// Add event listeners for buttons
+document.querySelector('.sub-twitch').addEventListener('click', function() {
+    subscription.subscribe(sendSubscribeEmail);
+});
 
-// document.querySelector('.unsub-twitch').addEventListener('click', function() {
-//     subscription.unsubscribe(sendUnsubscribeEmail);
-// });
+document.querySelector('.unsub-twitch').addEventListener('click', function() {
+    subscription.unsubscribe(sendUnsubscribeEmail);
+});
 
-// document.querySelector('.show-subscriptions').addEventListener('click', function() {
-//     subscription.fireEvent();
-// });
+document.querySelector('.show-subscriptions').addEventListener('click', function() {
+    subscription.fireEvent();
+});
 
 
-// // Add subscribe and unsubscribe callback functions
-// const sendSubscribeEmail = function() {
-//     console.log("Now send an email to the user, letting him know that he is subscribed using an email API service");
-// };
+// Add subscribe and unsubscribe callback functions
+const sendSubscribeEmail = function() {
+    console.log("Now send an email to the user, letting him know that he is subscribed using an email API service");
+};
 
-// const sendUnsubscribeEmail = function() {
-//     console.log("Now send an email to the user, letting him know that he is unsubscribed using an email API service");
-// };
+const sendUnsubscribeEmail = function() {
+    console.log("Now send an email to the user, letting him know that he is unsubscribed using an email API service");
+};
 
 // Mediator pattern
 
-const User = function(name) {
-    this.name = name;
-    this.chatroom = null;
-};
+// const User = function(name) {
+//     this.name = name;
+//     this.chatroom = null;
+// };
 
 
-User.prototype = {
-    send: function(message, to) {
-        // The keyword 'this' refers to the user created
-        // with the User constructor
-        // The 'this' keyword is actually a placeholder
-        // for 'from' in the send function existent in the
-        // Chatroom constructor
-        this.chatroom.send(message, to, this);
-    },
-};
-
-
-
-
-const Chatroom = function() {
-
-    let users = {};
-
-    return {
-        register: function(user) {
-            users[user.name] = user;
-            user.chatroom = this;
-        },
-        send: function(message, to, from) {
-            if (to) {
-                console.log(`${from.name} to ${to.name}: ${message}`);
-            }
-            else {
-                // Loop through the keys in the users object
-                // If the key is equal to the user that sent the message
-                // exclude that user from receiving the message
-                // else send the message to all chat
-                for (k in users) {
-                    if (users[k] !== from) {
-                        console.log(`${from.name} to ${users[k].name}: ${message}`);
-                    }
-                }
-            }
-        },
-    };
-};
+// User.prototype = {
+//     send: function(message, to) {
+//         // The keyword 'this' refers to the user created
+//         // with the User constructor
+//         // The 'this' keyword is actually a placeholder
+//         // for 'from' in the send function existent in the
+//         // Chatroom constructor
+//         this.chatroom.send(message, to, this);
+//     },
+// };
 
 
 
 
-const john = new User('John');
-const ioan = new User('Ioan');
-const andreea = new User('Andreea');
+// const Chatroom = function() {
 
-const chat = new Chatroom;
+//     let users = {};
 
-chat.register(ioan);
-chat.register(andreea);
-chat.register(john);
+//     return {
+//         register: function(user) {
+//             users[user.name] = user;
+//             user.chatroom = this;
+//         },
+//         send: function(message, to, from) {
+//             if (to) {
+//                 console.log(`${from.name} to ${to.name}: ${message}`);
+//             }
+//             else {
+//                 // Loop through the keys in the users object
+//                 // If the key is equal to the user that sent the message
+//                 // exclude that user from receiving the message
+//                 // else send the message to all chat
+//                 for (k in users) {
+//                     if (users[k] !== from) {
+//                         console.log(`${from.name} to ${users[k].name}: ${message}`);
+//                     }
+//                 }
+//             }
+//         },
+//     };
+// };
 
-ioan.send('I love you', andreea);
-john.send('Hello guys');
+
+
+
+// const john = new User('John');
+// const ioan = new User('Ioan');
+// const andreea = new User('Andreea');
+
+// const chat = new Chatroom;
+
+// chat.register(ioan);
+// chat.register(andreea);
+// chat.register(john);
+
+// ioan.send('I love you', andreea);
+// john.send('Hello guys');
 
 
 
