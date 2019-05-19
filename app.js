@@ -168,35 +168,89 @@ class PremiumAccountDays {
 }
 
 // Create PremiumAccountYear class for player
-class PremiumAccountYear {
-    constructor(player, year) {
-        this.player =  player;
-        this.cost = '£5';
-        this.year = year;
+// class PremiumAccountYear {
+//     constructor(player, year) {
+//         this.player =  player;
+//         this.cost = '£5';
+//         this.year = year;
+//     }
+// }
+
+// function createMember() {
+//     this.createMembership = function(player, type, days, year) {
+//         let member;
+        
+//         if (type == 'standard') {
+//             member =  new StandardAccount(player);
+//         }
+//         else if (type == 'premiumaccountyear') {
+//             member = new PremiumAccountYear(player, days, year);
+//         }
+//         else if (type == 'premiumaccountdays') {
+//             member =  new PremiumAccountDays(player, days, year);
+//         }
+        
+//         return member;
+//     };
+// }
+
+// let players = [];
+// let member = new createMember();
+// players.push(member.createMembership('goagl', 'standard'));
+// players.push(member.createMembership('RyanC00per', 'premiumaccountdays', '30'));
+// players.push(member.createMembership('SuperSaiyanGokuandVegeta', 'premiumaccountyear', '1'));
+// console.log(players);
+
+let countSubscriptions = 0;
+
+class SubscriptionTwitch {
+    constructor() {
+        this.subscriptions = [];
+    }
+
+    
+    subscribe(fn) {
+        this.subscriptions.push(fn);
+        alert("You are now subscribed to Twitch");
+    }
+    
+    unsubscribe(fn) {
+        if (this.subscriptions.length !== 0) {
+            for (var i = 0; i < this.subscriptions.length ; i++) {
+                countSubscriptions -= 1;
+            }
+        }
+        alert("You are now unsubscribed from Twitch");
+        alert(`You are subbed to ${countSubscriptions} channels on Twich`);
+    }
+    
+    fireEvent() {
+        this.subscriptions.forEach(function(subscription) {
+            countSubscriptions += 1;
+            alert(`You are subbed to ${countSubscriptions} channels on Twich`);
+        });
     }
 }
 
-function createMember() {
-    this.createMembership = function(player, type, days, year) {
-        let member;
-        
-        if (type == 'standard') {
-            member =  new StandardAccount(player);
-        }
-        else if (type == 'premiumaccountyear') {
-            member = new PremiumAccountYear(player, days, year);
-        }
-        else if (type == 'premiumaccountdays') {
-            member =  new PremiumAccountDays(player, days, year);
-        }
-        
-        return member;
-    };
-}
+const subscription = new SubscriptionTwitch();
 
-let players = [];
-let member = new createMember();
-players.push(member.createMembership('goagl', 'standard'));
-players.push(member.createMembership('RyanC00per', 'premiumaccountdays', '30'));
-players.push(member.createMembership('SuperSaiyanGokuandVegeta', 'premiumaccountyear', '1'));
-console.log(players);
+// Add event listeners for buttons
+document.querySelector('.sub-twitch').addEventListener('click', function() {
+    subscription.subscribe(sendSubscribeEmail);
+});
+
+document.querySelector('.unsub-twitch').addEventListener('click', function() {
+    subscription.unsubscribe(sendUnsubscribeEmail);
+});
+
+document.querySelector('.show-subscriptions').addEventListener('click', function() {
+    subscription.fireEvent();
+});
+
+const sendSubscribeEmail = function() {
+    console.log("Now send email to the user, letting him know that he is subscribed using an email API service");
+};
+
+const sendUnsubscribeEmail = function() {
+    console.log("Now send email to the user, letting him know that he is unsubscribed using an email API service");
+};
