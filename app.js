@@ -211,10 +211,10 @@ class SubscriptionTwitch {
     
     subscribe(fn) {
         if (countSubscriptions < 1) {
-            this.subscriptions.push(fn);
-            console.log(this.subscriptions);
+            if (this.subscriptions.length !== 1) {
+                this.subscriptions.push(fn);
+            }
             countSubscriptions += 1;
-            console.log(countSubscriptions);
         }
         alert("You are now subscribed to Twitch");
     }
@@ -222,8 +222,6 @@ class SubscriptionTwitch {
     unsubscribe(fn) {
         if (this.subscriptions.length !== 0 && countSubscriptions > 0) {
             countSubscriptions -= 1;
-             console.log(countSubscriptions);
-             console.log(this.subscriptions);
             alert("You are now unsubscribed from Twitch");
         }
     }
