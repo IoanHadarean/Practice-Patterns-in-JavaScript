@@ -150,22 +150,22 @@
 // Factory pattern
 
 // Create StandardAccount class for player
-class StandardAccount {
-    constructor(player) {
-        this.player =  player;
-        this.cost = '£0';
-        this.days = 0;
-    }
-}
+// class StandardAccount {
+//     constructor(player) {
+//         this.player =  player;
+//         this.cost = '£0';
+//         this.days = 0;
+//     }
+// }
 
-// Create PremiumAccountDays class for player
-class PremiumAccountDays {
-    constructor(player, days) {
-        this.player =  player;
-        this.cost = '£5';
-        this.days = days;
-    }
-}
+// // Create PremiumAccountDays class for player
+// class PremiumAccountDays {
+//     constructor(player, days) {
+//         this.player =  player;
+//         this.cost = '£5';
+//         this.days = days;
+//     }
+// }
 
 // Create PremiumAccountYear class for player
 // class PremiumAccountYear {
@@ -208,21 +208,24 @@ class SubscriptionTwitch {
         this.subscriptions = [];
     }
 
-    
     subscribe(fn) {
         if (countSubscriptions < 1) {
             if (this.subscriptions.length !== 1) {
                 this.subscriptions.push(fn);
+                alert("You are now subscribed to Twitch");
             }
             countSubscriptions += 1;
         }
-        alert("You are now subscribed to Twitch");
     }
     
     unsubscribe(fn) {
-        if (this.subscriptions.length !== 0 && countSubscriptions > 0) {
+        if (countSubscriptions > 0) {
             countSubscriptions -= 1;
-            alert("You are now unsubscribed from Twitch");
+            if (this.subscriptions.length !== 0) {
+                this.subscriptions.pop();
+                alert("You are now unsubscribed from Twitch");
+                
+            }
         }
     }
     
@@ -247,9 +250,9 @@ document.querySelector('.show-subscriptions').addEventListener('click', function
 });
 
 const sendSubscribeEmail = function() {
-    console.log("Now send email to the user, letting him know that he is subscribed using an email API service");
+    console.log("Now send an email to the user, letting him know that he is subscribed using an email API service");
 };
 
 const sendUnsubscribeEmail = function() {
-    console.log("Now send email to the user, letting him know that he is unsubscribed using an email API service");
+    console.log("Now send an email to the user, letting him know that he is unsubscribed using an email API service");
 };
