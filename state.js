@@ -47,3 +47,29 @@ const ContactState =  function(page) {
 
 // Initialise Page State
 const page =  new PageState;
+
+// Init the first
+page.init();
+
+// UI Vars
+const home = document.getElementById('home'),
+      about =  document.getElementById('about'),
+      contact =  document.getElementById('contact');
+      
+// Home
+home.addEventListener('click', (e) => {
+    page.change(new HomeState);
+    e.preventDefault();
+});
+
+// About
+about.addEventListener('click', (e) => {
+    page.change(new AboutState);
+    e.preventDefault();
+});
+
+// Contact
+contact.addEventListener('click', (e) => {
+    page.change(new ContactState);
+    e.preventDefault();
+});
