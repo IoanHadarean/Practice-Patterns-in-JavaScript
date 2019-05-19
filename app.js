@@ -201,60 +201,94 @@
 // players.push(member.createMembership('SuperSaiyanGokuandVegeta', 'premiumaccountyear', '1'));
 // console.log(players);
 
-let countSubscriptions = 0;
+// Observer Pattern
 
-class SubscriptionTwitch {
-    constructor() {
-        this.subscriptions = [];
-    }
+// let countSubscriptions = 0;
 
-    subscribe(fn) {
-        if (countSubscriptions < 1) {
-            if (this.subscriptions.length !== 1) {
-                this.subscriptions.push(fn);
-                alert("You are now subscribed to Twitch");
-            }
-            countSubscriptions += 1;
-        }
-    }
+// class SubscriptionTwitch {
+//     constructor() {
+//         this.subscriptions = [];
+//     }
+
+//     subscribe(fn) {
+//         if (countSubscriptions < 1) {
+//             if (this.subscriptions.length !== 1) {
+//                 this.subscriptions.push(fn);
+//                 alert("You are now subscribed to Twitch");
+//             }
+//             countSubscriptions += 1;
+//         }
+//     }
     
-    unsubscribe(fn) {
-        if (countSubscriptions > 0) {
-            countSubscriptions -= 1;
-            if (this.subscriptions.length !== 0) {
-                this.subscriptions.pop();
-                alert("You are now unsubscribed from Twitch");
+//     unsubscribe(fn) {
+//         if (countSubscriptions > 0) {
+//             countSubscriptions -= 1;
+//             if (this.subscriptions.length !== 0) {
+//                 this.subscriptions.pop();
+//                 alert("You are now unsubscribed from Twitch");
                 
-            }
-        }
-    }
+//             }
+//         }
+//     }
     
-    fireEvent() {
-        alert(`You are subbed to ${countSubscriptions} channels on Twich`);
+//     fireEvent() {
+//         alert(`You are subbed to ${countSubscriptions} channels on Twich`);
+//     }
+// }
+
+// const subscription = new SubscriptionTwitch();
+
+// // Add event listeners for buttons
+// document.querySelector('.sub-twitch').addEventListener('click', function() {
+//     subscription.subscribe(sendSubscribeEmail);
+// });
+
+// document.querySelector('.unsub-twitch').addEventListener('click', function() {
+//     subscription.unsubscribe(sendUnsubscribeEmail);
+// });
+
+// document.querySelector('.show-subscriptions').addEventListener('click', function() {
+//     subscription.fireEvent();
+// });
+
+
+// // Add subscribe and unsubscribe callback functions
+// const sendSubscribeEmail = function() {
+//     console.log("Now send an email to the user, letting him know that he is subscribed using an email API service");
+// };
+
+// const sendUnsubscribeEmail = function() {
+//     console.log("Now send an email to the user, letting him know that he is unsubscribed using an email API service");
+// };
+
+// Mediator pattern
+
+const User = function(name) {
+    this.name = name;
+    this.chatroom = null;
+};
+
+
+User.prototype =  {
+    send: function(to, message) {
+        console.log(`${this.name} to ${to.name}: ${message}`);
+    },
+    
+    receive: function(from, message) {
+        console.log(`From ${from.name}: ${message}`);
     }
-}
-
-const subscription = new SubscriptionTwitch();
-
-// Add event listeners for buttons
-document.querySelector('.sub-twitch').addEventListener('click', function() {
-    subscription.subscribe(sendSubscribeEmail);
-});
-
-document.querySelector('.unsub-twitch').addEventListener('click', function() {
-    subscription.unsubscribe(sendUnsubscribeEmail);
-});
-
-document.querySelector('.show-subscriptions').addEventListener('click', function() {
-    subscription.fireEvent();
-});
-
-
-// Add subscribe and unsubscribe callback functions
-const sendSubscribeEmail = function() {
-    console.log("Now send an email to the user, letting him know that he is subscribed using an email API service");
 };
 
-const sendUnsubscribeEmail = function() {
-    console.log("Now send an email to the user, letting him know that he is unsubscribed using an email API service");
-};
+
+
+
+
+
+const john = new User('John');
+console.log(john);
+const ioan = new User('Ioan');
+const andreea = new User('Andreea');
+
+const chatroom =  new Chatroom;
+ioan.send(andreea, 'I love you');
+andreea.receive(ioan, 'I love you');
